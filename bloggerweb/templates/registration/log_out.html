@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center text-success">You have been logged out successfully!</h2>
+    
+    <!-- Login Form -->
+    <div class="mt-4 text-center">
+        <form method="post" class="d-inline-block">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-primary btn-lg" type="submit">Log In</button>
+        </form>
+    </div>
+
+    <!-- Message and Redirect -->
+    <p class="mt-3 text-center">
+        <span class="text-muted">See you again soon!</span><br>
+        <a href="{% url 'login' %}" class="btn btn-link">Log in again</a>
+    </p>
+</div>
+{% endblock %}

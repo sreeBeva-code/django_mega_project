@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% load static %}  <!-- Add this line to load static files -->
+
+{% block title %}
+    Blog in Tweet
+{% endblock title %}
+
+{% block content %}
+    <div class="container mt-4">
+        <!-- Welcome Text -->
+        <h1 class="text-center text-white mt-4">Welcome to BlogWeb</h1>
+
+        <!-- Image Section -->
+        <div class="text-center my-4">
+            <img src="{% static 'welcome_photo.jpg' %}" alt="Welcome photo" class="img-fluid" style="max-width: 80%; height: auto;">
+        </div>
+        <!-- About Section -->
+
+        <section class="about-section text-white mt-5">
+            <div class="card bg-dark text-white">
+                <div class="card-body">
+                    <h2 class="card-title text-center">About Us</h2>
+                    <p class="card-text">
+                        BlogWeb is a platform where you can share your thoughts, tweets, and blog posts with the world. 
+                        Whether you're looking to express your opinion, share knowledge, or just interact with others, 
+                        BlogWeb provides you with the tools to do so. Join us today and be a part of a growing community of writers and thinkers.
+                    </p>
+                    <!-- Button to link to the Tweet page -->
+                    <div class="text-center">
+                        <a href="{% url 'tweet_list' %}" class="btn btn-outline-light">Go to Tweets</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+       
+    </div>
+{% endblock %}

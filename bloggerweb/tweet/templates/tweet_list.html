@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+{% load static %}  <!-- Add this line to load static files -->
+
+{% block title %}Blog in Tweet{% endblock title %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center text-white mb-4">Welcome to BlogWeb</h1>
+
+    <div class="text-center mb-4">
+        <a class="btn btn-success btn-lg" href="{% url 'tweet_create' %}">Create Now</a>
+    </div>
+
+    {% if tweets %}
+    <!-- Display tweets if available -->
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for tweet in tweets %}
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                {% if tweet.photo %}
+                    <img 
+                        src="{{ tweet.photo.url }}" 
+                        class="card-img-top img-fluid" 
+                        alt="Tweet Image"
+                        style="max-height: 200px; object-fit: cover;">
+                {% else %}
+                    <img 
+                        src="{% static 'default-placeholder.png' %}" 
+                        class="card-img-top img-fluid" 
+                        alt="No Image Available"
+                        style="max-height: 200px; object-fit: cover;">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title text-primary">{{ tweet.user.username }}</h5>
+                    <p class="card-text">{{ tweet.text }}</p>
+                </div>
+                {% if tweet.user == request.user %}
+                <div class="card-footer d-flex justify-content-between">
+                    <a href="{% url 'tweet_edit' tweet.id %}" class="btn btn-warning">Edit</a>
+                    <a href="{% url 'tweet_delete' tweet.id %}" class="btn btn-danger">Delete</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="text-center text-white">No tweets match your search criteria.</p>
+    {% endif %}
+</div>
+{% endblock %}
